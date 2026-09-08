@@ -246,14 +246,10 @@ telefon fotolaridagi burilishni to'g'rilaydi. Rasmlar Postgres bazasida
 
 ### Kategoriya rasmlari
 
-21 ta kategoriyadan 15 tasida haqiqiy foto bor. Manba — **Pexels**
+Barcha 21 ta kategoriyada haqiqiy foto bor. Manba — **Pexels**
 (<https://www.pexels.com/license/>): tijorat maqsadida bepul, atribusiya talab
 qilinmaydi, o'zgartirish mumkin. Rasmlar nusxasi o'z bazamizga saqlangan, ya'ni
 tashqi saytga bog'liq emasmiz.
-
-Rasm kutayotgan kategoriyalar: kabel kanallari, hisoblagich va o'lchov,
-sement va quruq aralashmalar, issiqlik va gidroizolyatsiya, eshik va derazalar,
-gipsokarton va profil.
 
 ### Nimalar qilinmaydi
 

@@ -11,49 +11,49 @@ datasource db {
 }
 
 model Category {
-  id        String     @id @default(cuid())
-  slug      String     @unique
+  id        String    @id @default(cuid())
+  slug      String    @unique
   nameUz    String
   nameRu    String
   nameEn    String
   image     String?
   icon      String?
-  sortOrder Int        @default(0)
-  isActive  Boolean    @default(true)
+  sortOrder Int       @default(0)
+  isActive  Boolean   @default(true)
   products  Product[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Product {
-  id          String      @id @default(cuid())
-  slug        String      @unique
-  sku         String?
-  nameUz      String
-  nameRu      String
-  nameEn      String
-  descUz      String?
-  descRu      String?
-  descEn      String?
-  brand       String?
+  id         String      @id @default(cuid())
+  slug       String      @unique
+  sku        String?
+  nameUz     String
+  nameRu     String
+  nameEn     String
+  descUz     String?
+  descRu     String?
+  descEn     String?
+  brand      String?
   /// Narx — so'mda, butun son
-  price       Int
+  price      Int
   /// Chegirmagacha bo'lgan narx (bo'lsa)
-  oldPrice    Int?
+  oldPrice   Int?
   /// O'lchov birligi kaliti: piece | kg | ton | m2 | m3 | m | liter | bag | roll | pack | set
-  unit        String      @default("piece")
-  stock       Int         @default(0)
-  image       String?
+  unit       String      @default("piece")
+  stock      Int         @default(0)
+  image      String?
   /// Qo'shimcha rasmlar, JSON massiv sifatida
-  images      String?
-  isActive    Boolean     @default(true)
-  isFeatured  Boolean     @default(false)
-  sortOrder   Int         @default(0)
-  categoryId  String
-  category    Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  orderItems  OrderItem[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  images     String?
+  isActive   Boolean     @default(true)
+  isFeatured Boolean     @default(false)
+  sortOrder  Int         @default(0)
+  categoryId String
+  category   Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 
   @@index([categoryId])
 }
@@ -101,4 +101,16 @@ model OrderItem {
 model Setting {
   key   String @id
   value String
+}
+
+/// Yuklangan rasmlar. Fayl tizimi o'rniga bazada saqlanadi — Vercel'da
+/// fayllar saqlanmaydi, qo'shimcha xizmat ham ochish shart emas.
+model Asset {
+  id        String   @id @default(cuid())
+  mime      String   @default("image/webp")
+  width     Int
+  height    Int
+  size      Int
+  data      Bytes
+  createdAt DateTime @default(now())
 }

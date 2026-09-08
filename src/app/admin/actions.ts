@@ -119,6 +119,15 @@ export async function deleteProductAction(formData: FormData) {
   revalidatePath("/");
 }
 
+/** Ro'yxatdan tez rasm biriktirish. */
+export async function setProductImageAction(id: string, url: string | null) {
+  await assertAdmin();
+  if (!id) return;
+  await prisma.product.update({ where: { id }, data: { image: url || null } });
+  revalidatePath("/admin/products");
+  revalidatePath("/");
+}
+
 export async function toggleProductActiveAction(formData: FormData) {
   await assertAdmin();
   const id = String(formData.get("id") ?? "");

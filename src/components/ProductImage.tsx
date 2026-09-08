@@ -1,38 +1,22 @@
 "use client";
 
 /**
- * Mahsulot rasmi. Rasm bo'lmasa — slug'dan hosil qilingan barqaror gradient
- * va kategoriya emojisi ko'rsatiladi, shunda katalog "singan" ko'rinmaydi.
+ * Mahsulot rasmi.
+ *
+ * Rasm bo'lmasa — bo'sh, bosiq o'rinbosar ko'rsatiladi ("foto kutilmoqda").
+ * Haqiqiy foto admin paneldan yuklanadi.
  */
-
-const PALETTES: [string, string][] = [
-  ["#ffd9b0", "#ffb066"],
-  ["#cfe0ff", "#9dbcf5"],
-  ["#d7f0dd", "#a4d9b6"],
-  ["#f3d9f7", "#d7a8e6"],
-  ["#ffe3e0", "#f6b1ab"],
-  ["#e2e5f0", "#b5bdd4"],
-  ["#fdf0c2", "#f2d377"],
-  ["#d6f1f4", "#9fd8e0"],
-];
-
-function hash(s: string): number {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
-  return Math.abs(h);
-}
-
 export function ProductImage({
   src,
   alt,
-  seed,
   icon,
   className = "",
   rounded = "rounded-2xl",
 }: {
   src?: string | null;
   alt: string;
-  seed: string;
+  /** Eskirgan: endi ishlatilmaydi, chaqiruvlarni buzmaslik uchun qoldirilgan. */
+  seed?: string;
   icon?: string | null;
   className?: string;
   rounded?: string;
@@ -49,18 +33,19 @@ export function ProductImage({
     );
   }
 
-  const [from, to] = PALETTES[hash(seed) % PALETTES.length];
-
   return (
     <div
-      className={`flex h-full w-full items-center justify-center ${rounded} ${className}`}
-      style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
+      className={`flex h-full w-full flex-col items-center justify-center gap-1 ${rounded} ${className}`}
+      style={{ background: "var(--surface-2)", border: "1px solid var(--border)" }}
       aria-label={alt}
       role="img"
     >
-      <span className="select-none text-[2.25rem] leading-none opacity-70 drop-shadow-sm sm:text-[2.75rem]">
-        {icon || "🧱"}
-      </span>
+      <svg viewBox="0 0 24 24" className="h-6 w-6 opacity-25" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3" y="5" width="18" height="14" rx="3" />
+        <circle cx="9" cy="10" r="1.6" />
+        <path d="M4.5 17.5 9.5 12l3.5 3.5 2.5-2 4 4.5" strokeLinejoin="round" />
+      </svg>
+      {icon && <span className="text-lg opacity-30">{icon}</span>}
     </div>
   );
 }

@@ -2,8 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/format";
 import { unitLabel } from "@/i18n";
-import { ProductImage } from "@/components/ProductImage";
-import { artForProduct } from "@/lib/artwork";
+import { QuickPhoto } from "@/components/QuickPhoto";
 import { ConfirmButton } from "@/components/ConfirmButton";
 import { deleteProductAction, toggleProductActiveAction } from "@/app/admin/actions";
 
@@ -75,9 +74,7 @@ export default async function AdminProducts({
       <div className="flex flex-col gap-2">
         {products.map((p) => (
           <div key={p.id} className="card flex items-center gap-3 p-2.5">
-            <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl">
-              <ProductImage src={p.image ?? artForProduct(p.slug, p.category.slug)} alt={p.nameUz} seed={p.slug} icon={p.category.icon} rounded="rounded-none" />
-            </div>
+            <QuickPhoto productId={p.id} image={p.image} alt={p.nameUz} icon={p.category.icon} />
 
             <div className="min-w-0 flex-1">
               <div className="line-1 text-sm font-semibold">{p.nameUz}</div>

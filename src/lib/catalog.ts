@@ -1,7 +1,6 @@
 import "server-only";
 import { prisma } from "./prisma";
 import { pick, type Locale } from "@/i18n";
-import { artForCategory, artForProduct } from "./artwork";
 import type { CardProduct } from "@/components/ProductCard";
 
 export type LocalizedCategory = {
@@ -44,7 +43,7 @@ export function toCategory(c: CategoryRow, locale: Locale, count?: number): Loca
     slug: c.slug,
     name: pick(c, "name", locale),
     icon: c.icon,
-    image: c.image ?? artForCategory(c.slug),
+    image: c.image,
     count,
   };
 }
@@ -57,7 +56,7 @@ export function toCard(p: ProductRow, locale: Locale): CardProduct {
     price: p.price,
     oldPrice: p.oldPrice,
     unit: p.unit,
-    image: p.image ?? artForProduct(p.slug, p.category?.slug ?? null),
+    image: p.image,
     icon: p.category?.icon ?? null,
     stock: p.stock,
     brand: p.brand,

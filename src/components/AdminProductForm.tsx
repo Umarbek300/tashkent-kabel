@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { saveProductAction } from "@/app/admin/actions";
+import { ImageField } from "./ImageField";
 
 const UNITS = [
   ["piece", "dona"],
@@ -119,10 +120,9 @@ export function AdminProductForm({
             <span className="mb-1 block text-xs muted">Tartib raqami</span>
             <input name="sortOrder" type="number" className="field" defaultValue={p?.sortOrder ?? 0} />
           </label>
-          <label className="block md:col-span-1">
-            <span className="mb-1 block text-xs muted">Rasm havolasi (URL)</span>
-            <input name="image" className="field" placeholder="https://…" defaultValue={p?.image ?? ""} />
-          </label>
+          <div className="md:col-span-3">
+            <ImageField name="image" defaultValue={p?.image} label="Mahsulot rasmi" />
+          </div>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-5">

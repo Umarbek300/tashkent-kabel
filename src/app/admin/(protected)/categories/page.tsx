@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { ProductImage } from "@/components/ProductImage";
-import { artForCategory } from "@/lib/artwork";
 import { ConfirmButton } from "@/components/ConfirmButton";
+import { ImageField } from "@/components/ImageField";
 import { deleteCategoryAction, saveCategoryAction } from "@/app/admin/actions";
 
 export const dynamic = "force-dynamic";
@@ -33,10 +33,9 @@ export default async function AdminCategories() {
             <span className="mb-1 block text-xs muted">Emoji</span>
             <input name="icon" className="field" placeholder="🧱" />
           </label>
-          <label className="block">
-            <span className="mb-1 block text-xs muted">Rasm havolasi</span>
-            <input name="image" className="field" placeholder="https://…" />
-          </label>
+          <div className="md:col-span-2">
+            <ImageField name="image" label="Kategoriya rasmi" />
+          </div>
           <label className="block">
             <span className="mb-1 block text-xs muted">Tartib</span>
             <input name="sortOrder" type="number" className="field" defaultValue={categories.length} />
@@ -54,7 +53,7 @@ export default async function AdminCategories() {
           <details key={c.id} className="card p-2.5">
             <summary className="flex cursor-pointer items-center gap-3">
               <div className="h-12 w-12 shrink-0 overflow-hidden rounded-xl">
-                <ProductImage src={c.image ?? artForCategory(c.slug)} alt={c.nameUz} seed={c.slug} icon={c.icon} rounded="rounded-none" />
+                <ProductImage src={c.image} alt={c.nameUz} seed={c.slug} icon={c.icon} rounded="rounded-none" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="line-1 text-sm font-semibold">{c.nameUz}</div>
@@ -84,10 +83,9 @@ export default async function AdminCategories() {
                 <span className="mb-1 block text-xs muted">Emoji</span>
                 <input name="icon" className="field" defaultValue={c.icon ?? ""} />
               </label>
-              <label className="block">
-                <span className="mb-1 block text-xs muted">Rasm havolasi</span>
-                <input name="image" className="field" defaultValue={c.image ?? ""} />
-              </label>
+              <div className="md:col-span-2">
+                <ImageField name="image" defaultValue={c.image} label="Kategoriya rasmi" />
+              </div>
               <label className="block">
                 <span className="mb-1 block text-xs muted">Tartib</span>
                 <input name="sortOrder" type="number" className="field" defaultValue={c.sortOrder} />

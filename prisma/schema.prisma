@@ -3,8 +3,11 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  // Ilova uchun — pooler orqali (ko'p ulanishga chidamli)
+  url       = env("DATABASE_URL")
+  // Migratsiyalar uchun — to'g'ridan-to'g'ri ulanish (pooler'siz)
+  directUrl = env("DIRECT_URL")
 }
 
 model Category {

@@ -52,10 +52,14 @@ NEXT_PUBLIC_SHOP_PHONE="+998 90 123 45 67"
 ## 3. Telegram bot va Mini App
 
 1. @BotFather dan token oling va `.env` dagi `TELEGRAM_BOT_TOKEN` ga yozing.
-2. Botni ishga tushiring:
+2. Jonli saytda bot **webhook** orqali ishlaydi — hech narsa ishga tushirish
+   shart emas. Ulash/tekshirish:
    ```bash
-   npm run bot
+   npm run bot:webhook        # ulash (deploy'dan keyin bir marta)
+   npm run bot:webhook:info   # holatni ko'rish
+   npm run bot:webhook:delete # o'chirish (lokal poling'ga qaytish)
    ```
+   Lokal sinov uchun: avval `npm run bot:webhook:delete`, keyin `npm run bot`.
 3. Botga `/id` yozing — u chat ID'ni qaytaradi. Uni `TELEGRAM_ORDER_CHAT_ID`
    ga yozing va serverni qayta ishga tushiring. Bu qilinmaguncha buyurtmalar
    faqat admin panelda ko'rinadi, Telegramga xabar kelmaydi.
@@ -159,21 +163,39 @@ fayl xostingiga joylashingiz mumkin.
 
 ## 7. Deploy
 
-Eng oson yo'l — **Vercel** yoki **Railway**:
+Sayt jonli: **https://tashkent-kabel.vercel.app**
+Kod: **https://github.com/Umarbek300/tashkent-kabel**
 
-1. Loyihani GitHub'ga yuklang.
-2. Vercel'da import qiling, `.env` o'zgaruvchilarini kiriting.
-3. SQLite fayl tizimi Vercel'da saqlanmaydi — jonli ish uchun **Postgres**ga
-   o'ting:
-   ```prisma
-   datasource db {
-     provider = "postgresql"
-     url      = env("DATABASE_URL")
-   }
-   ```
-   so'ng `npx prisma db push && npm run db:seed`.
-4. Botni doimiy ishlab turishi uchun alohida joyda (Railway worker, VPS)
-   `npm run bot` ni ishga tushiring.
+| Nima | Qayerda |
+|---|---|
+| Sayt | Vercel (`mahbub-tour/tashkent-kabel`, region `fra1`) |
+| Baza | Neon Postgres (Frankfurt) |
+| Bot | Vercel'dagi `/api/telegram` webhook — alohida server yo'q |
+
+### Yangi o'zgarishni chiqarish
+
+```bash
+git add -A && git commit -m "..." && git push
+npx vercel deploy --prod --yes
+```
+
+> GitHub'ga push qilinganda **avtomatik** deploy hozircha yoqilmagan: Vercel
+> akkauntida GitHub «Login Connection» ulanmagan. Yoqish uchun
+> vercel.com → Settings → Authentication → GitHub'ni ulang, so'ng
+> `npx vercel git connect`. Shundan keyin `git push` ning o'zi kifoya.
+
+### Sozlamani o'zgartirish
+
+```bash
+npx vercel env rm NOMI production --yes
+printf '%s' "yangi qiymat" | npx vercel env add NOMI production
+npx vercel deploy --prod --yes
+```
+
+### Bazani o'zgartirish
+
+Sxema o'zgarsa: `npm run db:migrate` (lokal) → commit → deploy.
+Vercel build vaqtida `prisma migrate deploy` o'zi ishlaydi.
 
 ---
 

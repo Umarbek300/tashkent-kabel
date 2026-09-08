@@ -4,17 +4,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3100",
-    "build": "prisma generate && next build",
+    "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start -p 3100",
     "lint": "next lint",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "rm -f prisma/dev.db && prisma db push && npm run db:seed",
+    "db:reset": "prisma migrate reset --force && npm run db:seed",
     "bot": "node bot/index.mjs",
     "db:seed:electrical": "tsx prisma/seed-electrical-run.ts",
     "bot:webhook": "node bot/webhook.mjs",
     "bot:webhook:delete": "node bot/webhook.mjs delete",
-    "bot:webhook:info": "node bot/webhook.mjs info"
+    "bot:webhook:info": "node bot/webhook.mjs info",
+    "postinstall": "prisma generate",
+    "db:migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",

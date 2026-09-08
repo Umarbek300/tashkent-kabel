@@ -266,11 +266,11 @@ export async function searchProducts(q: string, locale: Locale): Promise<CardPro
     where: {
       isActive: true,
       OR: [
-        { nameUz: { contains: term } },
-        { nameRu: { contains: term } },
-        { nameEn: { contains: term } },
-        { brand: { contains: term } },
-        { sku: { contains: term } },
+        { nameUz: { contains: term, mode: "insensitive" } },
+        { nameRu: { contains: term, mode: "insensitive" } },
+        { nameEn: { contains: term, mode: "insensitive" } },
+        { brand: { contains: term, mode: "insensitive" } },
+        { sku: { contains: term, mode: "insensitive" } },
       ],
     },
     orderBy: [{ isFeatured: "desc" }, { sortOrder: "asc" }],

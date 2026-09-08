@@ -23,11 +23,11 @@ export default async function AdminProducts({
         ...(q
           ? {
               OR: [
-                { nameUz: { contains: q } },
-                { nameRu: { contains: q } },
-                { nameEn: { contains: q } },
-                { brand: { contains: q } },
-                { sku: { contains: q } },
+                { nameUz: { contains: q, mode: "insensitive" as const } },
+                { nameRu: { contains: q, mode: "insensitive" as const } },
+                { nameEn: { contains: q, mode: "insensitive" as const } },
+                { brand: { contains: q, mode: "insensitive" as const } },
+                { sku: { contains: q, mode: "insensitive" as const } },
               ],
             }
           : {}),

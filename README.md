@@ -24,7 +24,7 @@ npm run dev          # http://localhost:3100
 ```
 
 Admin panel: <http://localhost:3100/admin>
-Boshlang'ich parol: `admin123` — **birinchi ish sifatida `.env` dagi `ADMIN_PASSWORD` ni o'zgartiring.**
+Parol `.env` dagi `ADMIN_PASSWORD` da. **Ishlab chiqarishda albatta kuchli parol qo'ying.**
 
 > ⚠️ `npm run dev` ishlab turganda `npm run build` qilmang — ikkalasi ham `.next`
 > papkasiga yozadi va kesh buziladi. Kerak bo'lsa avval dev'ni to'xtating.
@@ -39,9 +39,9 @@ DATABASE_URL="file:./dev.db"
 ADMIN_PASSWORD="kuchli-parol"
 ADMIN_SESSION_SECRET="tasodifiy-uzun-satr"
 
-TELEGRAM_BOT_TOKEN="8833891024:AAH…"   # @Uzkabel_n1bot
+TELEGRAM_BOT_TOKEN=""                  # @BotFather bergan token
 TELEGRAM_ORDER_CHAT_ID=""              # botga /id yozib oling
-TELEGRAM_SUPPORT="Uzkabel_n1bot"       # mijoz chek yuboradigan akkaunt
+TELEGRAM_SUPPORT=""                    # bot username (@ belgisisiz)
 
 NEXT_PUBLIC_SITE_URL="https://sizning-domeningiz.uz"
 NEXT_PUBLIC_SHOP_PHONE="+998 90 123 45 67"
@@ -51,7 +51,7 @@ NEXT_PUBLIC_SHOP_PHONE="+998 90 123 45 67"
 
 ## 3. Telegram bot va Mini App
 
-1. Bot allaqachon ulangan: **@Uzkabel_n1bot** (token `.env` ichida).
+1. @BotFather dan token oling va `.env` dagi `TELEGRAM_BOT_TOKEN` ga yozing.
 2. Botni ishga tushiring:
    ```bash
    npm run bot

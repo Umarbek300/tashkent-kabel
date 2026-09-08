@@ -1,0 +1,44 @@
+{
+  "name": "qurilish-market",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3100",
+    "build": "prisma generate && next build",
+    "start": "next start -p 3100",
+    "lint": "next lint",
+    "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:reset": "rm -f prisma/dev.db && prisma db push && npm run db:seed",
+    "bot": "node bot/index.mjs",
+    "db:seed:electrical": "tsx prisma/seed-electrical-run.ts",
+    "bot:webhook": "node bot/webhook.mjs",
+    "bot:webhook:delete": "node bot/webhook.mjs delete",
+    "bot:webhook:info": "node bot/webhook.mjs info"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.1.0",
+    "next": "15.5.25",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "server-only": "^0.0.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "prisma": "^6.1.0",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "allowScripts": {
+    "@prisma/client@6.19.3": true,
+    "@prisma/engines@6.19.3": true,
+    "esbuild@0.28.2": true,
+    "prisma@6.19.3": true,
+    "sharp@0.35.4": true
+  }
+}

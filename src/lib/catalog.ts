@@ -1,6 +1,7 @@
 import "server-only";
 import { prisma } from "./prisma";
 import { pick, type Locale } from "@/i18n";
+import { artForCategory, artForProduct } from "./artwork";
 import type { CardProduct } from "@/components/ProductCard";
 
 export type LocalizedCategory = {
@@ -34,7 +35,7 @@ type ProductRow = {
   image: string | null;
   stock: number;
   brand: string | null;
-  category?: { icon: string | null } | null;
+  category?: { icon: string | null; slug?: string } | null;
 };
 
 export function toCategory(c: CategoryRow, locale: Locale, count?: number): LocalizedCategory {
@@ -43,7 +44,7 @@ export function toCategory(c: CategoryRow, locale: Locale, count?: number): Loca
     slug: c.slug,
     name: pick(c, "name", locale),
     icon: c.icon,
-    image: c.image,
+    image: c.image ?? artForCategory(c.slug),
     count,
   };
 }
@@ -56,7 +57,7 @@ export function toCard(p: ProductRow, locale: Locale): CardProduct {
     price: p.price,
     oldPrice: p.oldPrice,
     unit: p.unit,
-    image: p.image,
+    image: p.image ?? artForProduct(p.slug, p.category?.slug ?? null),
     icon: p.category?.icon ?? null,
     stock: p.stock,
     brand: p.brand,
@@ -75,7 +76,7 @@ const CARD_SELECT = {
   image: true,
   stock: true,
   brand: true,
-  category: { select: { icon: true } },
+  category: { select: { icon: true, slug: true } },
 } as const;
 
 export async function getCategories(locale: Locale): Promise<LocalizedCategory[]> {

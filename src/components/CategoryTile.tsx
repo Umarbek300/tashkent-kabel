@@ -2,17 +2,11 @@ import Link from "next/link";
 import { ProductImage } from "./ProductImage";
 import type { LocalizedCategory } from "@/lib/catalog";
 
-export function CategoryTile({
-  c,
-  tall = false,
-}: {
-  c: LocalizedCategory;
-  tall?: boolean;
-}) {
+export function CategoryTile({ c }: { c: LocalizedCategory }) {
   return (
     <Link href={`/c/${c.slug}`} className="group block transition active:scale-[0.98]">
       <div
-        className={`relative w-full overflow-hidden rounded-2xl ${tall ? "aspect-[4/5]" : "aspect-[4/3]"}`}
+        className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl"
       >
         <ProductImage
           src={c.image}

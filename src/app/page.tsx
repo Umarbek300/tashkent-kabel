@@ -22,9 +22,9 @@ export default async function HomePage() {
       <section className="mt-1">
         <h2 className="mb-2.5 px-0.5 text-[17px] font-bold">{d.categories}</h2>
         <div className="columns-2 gap-2.5 sm:columns-3 md:columns-4">
-          {categories.map((c, i) => (
+          {categories.map((c) => (
             <div key={c.id} className="mb-2.5 break-inside-avoid">
-              <CategoryTile c={c} tall={i % 3 === 0} />
+              <CategoryTile c={c} />
             </div>
           ))}
         </div>

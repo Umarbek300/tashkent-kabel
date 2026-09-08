@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { formatPrice } from "@/lib/format";
 import { unitLabel } from "@/i18n";
 import { ProductImage } from "@/components/ProductImage";
+import { artForProduct } from "@/lib/artwork";
 import { ConfirmButton } from "@/components/ConfirmButton";
 import { deleteProductAction, toggleProductActiveAction } from "@/app/admin/actions";
 
@@ -34,7 +35,7 @@ export default async function AdminProducts({
       },
       orderBy: [{ categoryId: "asc" }, { sortOrder: "asc" }],
       take: 300,
-      include: { category: { select: { nameUz: true, icon: true } } },
+      include: { category: { select: { nameUz: true, icon: true, slug: true } } },
     }),
   ]);
 
@@ -75,7 +76,7 @@ export default async function AdminProducts({
         {products.map((p) => (
           <div key={p.id} className="card flex items-center gap-3 p-2.5">
             <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl">
-              <ProductImage src={p.image} alt={p.nameUz} seed={p.slug} icon={p.category.icon} rounded="rounded-none" />
+              <ProductImage src={p.image ?? artForProduct(p.slug, p.category.slug)} alt={p.nameUz} seed={p.slug} icon={p.category.icon} rounded="rounded-none" />
             </div>
 
             <div className="min-w-0 flex-1">

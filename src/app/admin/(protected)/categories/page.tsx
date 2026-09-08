@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { ProductImage } from "@/components/ProductImage";
+import { artForCategory } from "@/lib/artwork";
 import { ConfirmButton } from "@/components/ConfirmButton";
 import { deleteCategoryAction, saveCategoryAction } from "@/app/admin/actions";
 
@@ -53,7 +54,7 @@ export default async function AdminCategories() {
           <details key={c.id} className="card p-2.5">
             <summary className="flex cursor-pointer items-center gap-3">
               <div className="h-12 w-12 shrink-0 overflow-hidden rounded-xl">
-                <ProductImage src={c.image} alt={c.nameUz} seed={c.slug} icon={c.icon} rounded="rounded-none" />
+                <ProductImage src={c.image ?? artForCategory(c.slug)} alt={c.nameUz} seed={c.slug} icon={c.icon} rounded="rounded-none" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="line-1 text-sm font-semibold">{c.nameUz}</div>

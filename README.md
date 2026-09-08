@@ -226,3 +226,39 @@ Narxlar va assortiment `prisma/seed-electrical.ts` (kabel/elektr) va
 - **Faqat kabel bo'limini** yangilash: `npm run db:seed:electrical`.
 
 > Seed faylidagi narxlar taxminiy — prays-listingiz bo'yicha albatta tekshiring.
+
+---
+
+## 10. Rasmlar va ularning manbasi
+
+### Mahsulot rasmlari
+
+Admin paneldan yuklanadi. Ikki yo'l:
+
+- **Tez:** Mahsulotlar ro'yxatida chapdagi katakchani bosing — telefonda kamera
+  ochiladi, suratga olasiz, rasm darhol biriktiriladi.
+- **Batafsil:** mahsulotni tahrirlashda «Mahsulot rasmi» maydoni — fayl tanlash,
+  sudrab tashlash yoki havola yozish.
+
+Server rasmni avtomatik 1000 pikselgacha kichraytiradi, WebP ga o'giradi va
+telefon fotolaridagi burilishni to'g'rilaydi. Rasmlar Postgres bazasida
+(`Asset` jadvali) saqlanadi va `/api/img/<id>` orqali beriladi.
+
+### Kategoriya rasmlari
+
+21 ta kategoriyadan 15 tasida haqiqiy foto bor. Manba — **Pexels**
+(<https://www.pexels.com/license/>): tijorat maqsadida bepul, atribusiya talab
+qilinmaydi, o'zgartirish mumkin. Rasmlar nusxasi o'z bazamizga saqlangan, ya'ni
+tashqi saytga bog'liq emasmiz.
+
+Rasm kutayotgan kategoriyalar: kabel kanallari, hisoblagich va o'lchov,
+sement va quruq aralashmalar, issiqlik va gidroizolyatsiya, eshik va derazalar,
+gipsokarton va profil.
+
+### Nimalar qilinmaydi
+
+Boshqa saytlardan (raqobatchilar, ishlab chiqaruvchilar) rasm olib, undagi
+logotip yoki suv belgisini o'chirish — mualliflik huquqini buzadi va da'voga
+sabab bo'lishi mumkin. Ishonchli manbalar: o'z suratlaringiz, yetkazib
+beruvchidan rasmiy olingan katalog, yoki Pexels/Unsplash kabi bepul litsenziyali
+fotobanklar.
